@@ -4,10 +4,10 @@ import Answer from './Answer';
 function Answers(props) {
     return (
         <>
-            <Answer letter="A" answer="Framework" />
-            <Answer letter="B" answer="Library" />
-            <Answer letter="C" answer="Library" />
-            <Answer letter="D" answer="Library" />
+            <Answer letter="a" answer={props.question.answer_a} />
+            <Answer letter="b" answer={props.question.answer_b} />
+            <Answer letter="c" answer={props.question.answer_c} />
+            <Answer letter="d" answer={props.question.answer_d} />
         </>
     )
 }
