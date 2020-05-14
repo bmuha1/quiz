@@ -7,6 +7,8 @@ import './App.css';
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState('');
+  const [answers, setAnswers] = useState([]);
+  const [error, setError] = useState('');
 
   const questions = [
     {
@@ -44,14 +46,44 @@ function App() {
 
   const handleClick = e => {
     setCurrentAnswer(e.target.value);
+    setError('');
+  }
+
+  const renderError = () => {
+    if (!error) {
+      return;
+    }
+
+    return <div className="error">{error}</div>
+  }
+
+  const next = () => {
+    const answer = {questionId:question.id, answer: currentAnswer};
+
+    if (!currentAnswer) {
+      setError('Please select an option');
+      return;
+    }
+
+    answers.push(answer);
+    setAnswers(answers);
+    setCurrentAnswer('');
+
+    if (currentQuestion + 1 < questions.length) {
+      setCurrentQuestion(currentQuestion + 1);
+      return; 
+    }
   }
 
   return (
     <div className="container">
-      <Progress total="3" current="1" />
+      <Progress total={questions.length} current={currentQuestion + 1} />
       <Question question={question.question} />
+      {renderError()}
       <Answers question={question} currentAnswer={currentAnswer} handleClick={handleClick} />
-      <button className="btn btn-primary">Confirm and Continue</button>
+      <button className="btn btn-primary" onClick={next}>
+        Confirm and Continue
+      </button>
     </div>
   );
 }
