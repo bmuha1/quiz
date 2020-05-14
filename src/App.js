@@ -2,15 +2,16 @@ import React, {useReducer} from 'react';
 import Progress from './components/Progress';
 import Question from './components/Question';
 import Answers from './components/Answers';
+import {
+  SET_ANSWERS,
+  SET_CURRENT_QUESTION,
+  SET_CURRENT_ANSWER,
+  SET_ERROR,
+  SET_SHOW_RESULTS,
+  RESET_QUIZ,
+} from './reducers/types.js';
 
 import './App.css';
-
-const SET_CURRENT_ANSWER = 'SET_CURRENT_ANSWER';
-const SET_CURRENT_QUESTION = 'SET_CURRENT_QUESTION';
-const SET_ERROR = 'SET_ERROR';
-const SET_SHOW_RESULTS = 'SET_SHOW_RESULTS';
-const SET_ANSWERS = 'SET_ANSWERS';
-const RESET_QUIZ = 'RESET_QUIZ';
 
 function quizReducer(state, action) {
   switch(action.type) {
@@ -99,11 +100,6 @@ function App() {
 
   const question = questions[currentQuestion];
 
-  const handleClick = e => {
-    dispatch({type: SET_CURRENT_ANSWER, currentAnswer: e.target.value});
-    dispatch({type: SET_ERROR, error: ''});
-  }
-
   const renderError = () => {
     if (!error) {
       return;
@@ -173,10 +169,17 @@ function App() {
   } else {
     return (
       <div className="container">
-        <Progress total={questions.length} current={currentQuestion + 1} />
+        <Progress
+          total={questions.length}
+          current={currentQuestion + 1}
+        />
         <Question question={question.question} />
         {renderError()}
-        <Answers question={question} currentAnswer={currentAnswer} handleClick={handleClick} />
+        <Answers
+          question={question}
+          currentAnswer={currentAnswer}
+          dispatch={dispatch}
+        />
         <button className="btn btn-primary" onClick={next}>
           Confirm and Continue
         </button>
