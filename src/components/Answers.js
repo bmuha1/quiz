@@ -1,32 +1,37 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Answer from './Answer';
+import QuizContext from '../context/QuizContext';
 
-function Answers(props) {
+function Answers() {
+    const {state, dispatch} = useContext(QuizContext);
+    const {currentAnswer, currentQuestion, questions} = state;
+    const question = questions[currentQuestion]
+
     return (
         <>
             <Answer
                 letter="a"
-                answer={props.question.answer_a}
-                dispatch={props.dispatch}
-                selected={props.currentAnswer === 'a'}
+                answer={question.answer_a}
+                dispatch={dispatch}
+                selected={currentAnswer === 'a'}
             />
             <Answer
                 letter="b"
-                answer={props.question.answer_b}
-                dispatch={props.dispatch}
-                selected={props.currentAnswer === 'b'}
+                answer={question.answer_b}
+                dispatch={dispatch}
+                selected={currentAnswer === 'b'}
             />
             <Answer
                 letter="c"
-                answer={props.question.answer_c}
-                dispatch={props.dispatch}
-                selected={props.currentAnswer === 'c'}
+                answer={question.answer_c}
+                dispatch={dispatch}
+                selected={currentAnswer === 'c'}
             />
             <Answer
                 letter="d"
-                answer={props.question.answer_d}
-                dispatch={props.dispatch}
-                selected={props.currentAnswer === 'd'}
+                answer={question.answer_d}
+                dispatch={dispatch}
+                selected={currentAnswer === 'd'}
             />
         </>
     )
