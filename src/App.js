@@ -136,10 +136,9 @@ function App() {
             total={questions.length}
             current={currentQuestion + 1}
           />
-          <Question question={question.question} />
+          <Question />
           {renderError()}
-          <Answers
-          />
+          <Answers />
           <button className="btn btn-primary" onClick={next}>
             Confirm and Continue
           </button>

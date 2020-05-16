@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import QuizContext from '../context/QuizContext';
 
 function Question(props) {
-    return (
-        <h1>
-            {props.question}
-        </h1>
-        )
+    const {state} = useContext(QuizContext);
+    const {currentQuestion, questions} = state;
+    const question = questions[currentQuestion];
+    return <h1>{question.question}</h1>
 }
 
 export default Question;

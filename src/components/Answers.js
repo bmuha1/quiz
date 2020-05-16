@@ -5,7 +5,7 @@ import QuizContext from '../context/QuizContext';
 function Answers() {
     const {state, dispatch} = useContext(QuizContext);
     const {currentAnswer, currentQuestion, questions} = state;
-    const question = questions[currentQuestion]
+    const question = questions[currentQuestion];
 
     return (
         <>
